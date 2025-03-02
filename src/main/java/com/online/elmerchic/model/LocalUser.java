@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "local_user")
 @Getter
@@ -14,22 +17,27 @@ public class LocalUser {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="id",nullable = false)
-    Long id;
+    private Long id;
 
     @Column(name = "username" , nullable = false , unique = true)
-    String userName;
+    private String userName;
 
     @Column(name="password",nullable = false,length = 1000)
-    String password;
+    private String password;
 
     @Column(name="email",nullable = false,unique = true)
-    String email;
+    private String email;
 
     @Column(name = "first_name",nullable = false)
-    String firsName;
+    private String firsName;
 
     @Column(name = "last_name",nullable = false)
-    String lastName;
+    private String lastName;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE , orphanRemoval = true)
+    private List<Address> addresses = new ArrayList<>();
+
+
 
 
 
